@@ -3,28 +3,129 @@ Exploring correlations in a tidy R framework with corrr
 author: Dr Simon Jackson
 date: January 13, 2017
 autosize: true
+css: custom.css
+font-family: 'Arial'
 
 Presented at rstudio::conf, 2017
 
-First Slide
+[@drsimonj](https://twitter.com/drsimonj)
+
+Motivation
 ========================================================
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+- Correlations are fundamental measures of association.
+- We want to explore them.
+- We should explore them!
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+Motivation
+========================================================
 
-Slide With Code
+But exploring correlations in R often means working with matrices and base R.
+
+```{r}
+cor(mtcars[1:6])
+```
+
+corrr
+========================================================
+
+**corrr** makes it easy to explore **corr**elations in **R**.
+
+- Work with data frames instead of matrices.
+- Designed on, and to leverage, tidyverse tools.
+- Data frames in and out means pipelines `%>%`
+
+API
+========================================================
+
+Install and load corrr to use functions that:
+
+- **Create a correlation data frame**
+- Print and visualize correlations
+- Make internal changes (stay square)
+- Reshape the data frame (go rectangle)
+
+```{r}
+# Install from CRAN
+# install.packages("corrr")
+
+# Or latest development version from GitHub
+# devtools::install_github("drsimonj/corrr")
+
+library(corrr)
+```
+
+Create a correlation data frame
+========================================================
+
+<img src='imgs/to-cord-df.png'>
+
+
+Create a correlation data frame  (tibble)
 ========================================================
 
 ```{r}
-summary(cars)
+correlate(mtcars)
 ```
 
-Slide With Plot
+Bonus: pairwise deletion used.  
+No more `use = "pairwise.complete.obs`"
+
+Leverage the tidyverse
 ========================================================
 
-```{r, echo=FALSE}
-plot(cars)
+```{r}
+# dplyr is loaded with corrr
+
+correlate(mtcars) %>% 
+  select(rowname, mpg:hp) %>% 
+  filter(mpg > .3)
+```
+
+Get fashionable
+========================================================
+
+```{r}
+correlate(mtcars) %>% fashion()
+```
+
+Get visual
+========================================================
+
+```{r network_plot, fig.width = 6, fig.height = 5, fig.align="center"}
+correlate(mtcars) %>% network_plot()
+```
+
+Get visual
+========================================================
+
+```{r rplot, fig.width = 6, fig.height = 5, fig.align="center"}
+correlate(mtcars) %>% rplot()
+```
+
+Find patterns
+========================================================
+
+```{r rearrange, fig.width = 6, fig.height = 5, fig.align="center"}
+correlate(mtcars) %>% rearrange() %>% rplot()
+```
+
+Focus in
+========================================================
+
+```{r, fig.width = 6, fig.height = 5, fig.align="center"}
+correlate(mtcars) %>% focus(mpg, drat)
+```
+
+Did I mention the tidyverse?
+========================================================
+
+```{r ggplot, fig.width = 8, fig.height = 5, fig.align="center", message = F}
+library(ggplot2)
+correlate(mtcars) %>% focus(mpg) %>%
+  mutate(rowname = reorder(rowname, mpg)) %>% 
+  ggplot(aes(rowname, mpg, fill = mpg)) +
+    geom_col() +
+    labs(x = NULL, y = "Correlation with mpg") +
+    coord_flip() + guides(fill = "none") + theme_minimal()
 ```
