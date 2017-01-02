@@ -1,0 +1,4 @@
+.reveal .slideContent code {
+  /* Make sure code fits on slide */
+  font-size: 100%;
+}
