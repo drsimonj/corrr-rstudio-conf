@@ -20,7 +20,7 @@ Motivation
 Motivation
 ========================================================
 
-But exploring correlations in R often means working with matrices and base R.
+But exploring correlations in R often means working with matrices and base R...
 
 
 ```r
@@ -36,6 +36,8 @@ hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.4487591  0.6587479
 drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.0000000 -0.7124406
 wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.7124406  1.0000000
 ```
+
+.. when we have so many tools for data frames!
 
 corrr
 ========================================================
@@ -217,3 +219,14 @@ correlate(mtcars) %>% focus(mpg) %>%
 ```
 
 <img src="slides-figure/ggplot-1.png" title="plot of chunk ggplot" alt="plot of chunk ggplot" style="display: block; margin: auto;" />
+
+Sign off
+========================================================
+
+Thank you!
+
+And thanks to RStudio for having me.
+
+[@drsimonj](https://twitter.com/drsimonj)
+
+[github.com/drsimonj](https://github.com/drsimonj)

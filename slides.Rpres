@@ -20,11 +20,13 @@ Motivation
 Motivation
 ========================================================
 
-But exploring correlations in R often means working with matrices and base R.
+But exploring correlations in R often means working with matrices and base R...
 
 ```{r}
 cor(mtcars[1:6])
 ```
+
+.. when we have so many tools for data frames!
 
 corrr
 ========================================================
@@ -129,3 +131,14 @@ correlate(mtcars) %>% focus(mpg) %>%
     labs(x = NULL, y = "Correlation with mpg") +
     coord_flip() + guides(fill = "none") + theme_minimal()
 ```
+
+Sign off
+========================================================
+
+Thank you!
+
+And thanks to RStudio for having me.
+
+[@drsimonj](https://twitter.com/drsimonj)
+
+[github.com/drsimonj](https://github.com/drsimonj)
