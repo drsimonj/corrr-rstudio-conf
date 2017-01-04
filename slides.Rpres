@@ -17,67 +17,90 @@ d <- simulate_data()
 
 Motivation
 ========================================================
+transition: none
+incremental: true
 
-- Correlations are fundamental measures of association.
-- We want to explore them.
-- We should explore them!
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**IQ**  
+<img src="imgs/Homer_smart.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**R skill**  
+<img src="imgs/Homer_R.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**Baldness**  
+<img src="imgs/Homer_bald.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
 
 ```{r}
-head(d)
+head(d, 3)
 ```
-
 
 Motivation
 ========================================================
 
-But exploring correlations in R often means working with matrices and base R...
+But exploring the correlations meant working with matrices...
 
 ```{r}
-cor(mtcars[1:6])
+cor(d)
 ```
 
-.. when we have so many tools for data frames!
+Motivation
+========================================================
+
+... when we have so many fantastic tools for working with data frames!
 
 corrr
 ========================================================
 
-**corrr** makes it easy to explore **corr**elations in **R**.
+**corrr** makes it easy to explore **corr**elations in **R** by helping to create and work with correlation data frames.
 
-- Work with data frames instead of matrices.
-- Designed on, and to leverage, tidyverse tools.
-- Data frames in and out means pipelines `%>%`
+<img src="imgs/to-cord-df.png">
 
-API
+Using corrr
 ========================================================
 
-Install and load corrr to use functions that:
+Install from CRAN...
 
-- **Create a correlation data frame**
-- Print and visualize correlations
-- Make internal changes (stay square)
-- Reshape the data frame (go rectangle)
-
-```{r}
-# Install from CRAN
-# install.packages("corrr")
-
-# Or latest development version from GitHub
-# devtools::install_github("drsimonj/corrr")
-
-library(corrr)
+```{r, eval = F}
+install.packages("corrr")
 ```
 
-Create a correlation data frame
-========================================================
+... or GitHub ...
 
-<img src='imgs/to-cord-df.png'>
+```{r, eval = F}
+install.packages("devtools")
+devtools::install_github("drsimonj/corrr")
+```
 
+... and load
+
+```{r}
+library(corrr)
+```
 
 Create a correlation data frame  (tibble)
 ========================================================
 
 ```{r}
-correlate(mtcars)
+correlate(d)
 ```
 
 Bonus: pairwise deletion used.  
@@ -89,30 +112,30 @@ Leverage the tidyverse
 ```{r}
 # dplyr is loaded with corrr
 
-correlate(mtcars) %>% 
-  select(rowname, mpg:hp) %>% 
-  filter(mpg > .3)
+correlate(d) %>% 
+  select(rowname, contains("_1")) %>% 
+  filter(bald_1 > 0)
+```
+
+What else?
+========================================================
+
+Other corrr functions support routine exploration.
+
+Examples...
+
+Get visual
+========================================================
+
+```{r network_plot, fig.width = 6, fig.height = 5, fig.align="center"}
+correlate(d) %>% network_plot()
 ```
 
 Get fashionable
 ========================================================
 
 ```{r}
-correlate(mtcars) %>% fashion()
-```
-
-Get visual
-========================================================
-
-```{r network_plot, fig.width = 6, fig.height = 5, fig.align="center"}
-correlate(mtcars) %>% network_plot()
-```
-
-Get visual
-========================================================
-
-```{r rplot, fig.width = 6, fig.height = 5, fig.align="center"}
-correlate(mtcars) %>% rplot()
+correlate(d) %>% fashion()
 ```
 
 Find patterns
@@ -122,24 +145,16 @@ Find patterns
 correlate(mtcars) %>% rearrange() %>% rplot()
 ```
 
-Focus in
-========================================================
-
-```{r, fig.width = 6, fig.height = 5, fig.align="center"}
-correlate(mtcars) %>% focus(mpg, drat)
-```
-
 Did I mention the tidyverse?
 ========================================================
 
 ```{r ggplot, fig.width = 8, fig.height = 5, fig.align="center", message = F}
 library(ggplot2)
-correlate(mtcars) %>% focus(mpg) %>%
-  mutate(rowname = reorder(rowname, mpg)) %>% 
-  ggplot(aes(rowname, mpg, fill = mpg)) +
-    geom_col() +
-    labs(x = NULL, y = "Correlation with mpg") +
-    coord_flip() + guides(fill = "none") + theme_minimal()
+correlate(d) %>% focus(bald_1) %>%
+  mutate(rowname = reorder(rowname, bald_1)) %>% 
+  ggplot(aes(rowname, bald_1, fill = bald_1)) +
+    geom_col() + coord_flip() + guides(fill = "none") + 
+    labs(x = NULL, y = "Correlation with bald_1") + theme_minimal()
 ```
 
 Sign off

@@ -14,117 +14,147 @@ Presented at rstudio::conf, 2017
 
 Motivation
 ========================================================
+transition: none
+incremental: true
 
-- Correlations are fundamental measures of association.
-- We want to explore them.
-- We should explore them!
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**IQ**  
+<img src="imgs/Homer_smart.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**R skill**  
+<img src="imgs/Homer_R.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
+
+**Baldness**  
+<img src="imgs/Homer_bald.jpg" height=400>
+
+Motivation
+========================================================
+transition: none
+
+As part of a national research project, I collected data from 1000 Australians about their:
 
 
 ```r
-head(d)
+head(d, 3)
 ```
 
 ```
-      bald_1      bald_2     bald_3       IQ_1        IQ_2       IQ_3
-1 -0.5812381 -1.34107622 -0.5800934 -0.7481906 -0.31587597 -0.4922968
-2  0.6994510  0.56918117  1.1604899 -0.9431998 -0.14279370 -0.6012748
-3 -0.4618449  0.02736727 -0.5604029  0.6565304 -0.07346896 -0.1365283
-4  0.5260071  0.64635394  1.4817073 -0.6517722 -0.50854674 -0.6449797
-5  1.0723704  1.77464774  2.2675238  3.5319785  1.15559115  2.1915605
-6 -0.6738168  0.86217081 -0.5479316  1.2696257  0.81532193  1.4272195
-       liar_1     liar_2       liar_3
-1 -0.03247022 -0.9140149  0.216514994
-2  1.07503515  0.2158678  0.537878869
-3  0.12998831 -0.7740639 -1.310696341
-4 -1.20174479 -1.2562577 -2.541044445
-5  0.28773248 -0.1727605  0.066281362
-6  1.03354573  0.1255845  0.005873902
+         IQ_1       IQ_2       IQ_3   Rskill_1   Rskill_2    Rskill_3
+1 -0.11799721 -0.7392698 -0.6747767 -0.6960839 -0.5367043 -0.61625979
+2  0.40704571 -1.4477217  0.4841486  1.1862742  1.0192495  1.36081114
+3 -0.02605936  0.2724224 -0.1837364 -0.5016459 -1.5029427 -0.01913065
+       bald_1     bald_2      bald_3
+1 -0.06887305 -0.9494054  0.64946115
+2 -0.40052009 -0.2932141 -0.02779331
+3 -0.47746994  0.7706985  0.12044271
 ```
-
 
 Motivation
 ========================================================
 
-But exploring correlations in R often means working with matrices and base R...
+But exploring the correlations meant working with matrices...
 
 
 ```r
-cor(mtcars[1:6])
+cor(d)
 ```
 
 ```
-            mpg        cyl       disp         hp       drat         wt
-mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.6811719 -0.8676594
-cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.6999381  0.7824958
-disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.7102139  0.8879799
-hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.4487591  0.6587479
-drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.0000000 -0.7124406
-wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.7124406  1.0000000
+               IQ_1       IQ_2       IQ_3   Rskill_1   Rskill_2   Rskill_3
+IQ_1      1.0000000  0.4803999  0.4369312  0.2866469  0.3196786  0.3017266
+IQ_2      0.4803999  1.0000000  0.4451631  0.2798004  0.3020919  0.3251597
+IQ_3      0.4369312  0.4451631  1.0000000  0.2840341  0.3075566  0.2948236
+Rskill_1  0.2866469  0.2798004  0.2840341  1.0000000  0.4445312  0.4216245
+Rskill_2  0.3196786  0.3020919  0.3075566  0.4445312  1.0000000  0.4266115
+Rskill_3  0.3017266  0.3251597  0.2948236  0.4216245  0.4266115  1.0000000
+bald_1   -0.2937423 -0.3110973 -0.2914030 -0.2211088 -0.3182570 -0.2994670
+bald_2   -0.2896269 -0.3117055 -0.2503099 -0.2785966 -0.3029422 -0.3121427
+bald_3   -0.2977496 -0.2968287 -0.2524835 -0.2827164 -0.3080645 -0.2862883
+             bald_1     bald_2     bald_3
+IQ_1     -0.2937423 -0.2896269 -0.2977496
+IQ_2     -0.3110973 -0.3117055 -0.2968287
+IQ_3     -0.2914030 -0.2503099 -0.2524835
+Rskill_1 -0.2211088 -0.2785966 -0.2827164
+Rskill_2 -0.3182570 -0.3029422 -0.3080645
+Rskill_3 -0.2994670 -0.3121427 -0.2862883
+bald_1    1.0000000  0.4608222  0.4553511
+bald_2    0.4608222  1.0000000  0.4855416
+bald_3    0.4553511  0.4855416  1.0000000
 ```
 
-.. when we have so many tools for data frames!
+Motivation
+========================================================
+
+... when we have so many fantastic tools for working with data frames!
 
 corrr
 ========================================================
 
-**corrr** makes it easy to explore **corr**elations in **R**.
+**corrr** makes it easy to explore **corr**elations in **R** by helping to create and work with correlation data frames.
 
-- Work with data frames instead of matrices.
-- Designed on, and to leverage, tidyverse tools.
-- Data frames in and out means pipelines `%>%`
+<img src="imgs/to-cord-df.png">
 
-API
+Using corrr
 ========================================================
 
-Install and load corrr to use functions that:
-
-- **Create a correlation data frame**
-- Print and visualize correlations
-- Make internal changes (stay square)
-- Reshape the data frame (go rectangle)
+Install from CRAN...
 
 
 ```r
-# Install from CRAN
-# install.packages("corrr")
-
-# Or latest development version from GitHub
-# devtools::install_github("drsimonj/corrr")
-
-library(corrr)
+install.packages("corrr")
 ```
 
-Create a correlation data frame
-========================================================
+... or GitHub ...
 
-<img src='imgs/to-cord-df.png'>
 
+```r
+install.packages("devtools")
+devtools::install_github("drsimonj/corrr")
+```
+
+... and load
+
+
+```r
+library(corrr)
+```
 
 Create a correlation data frame  (tibble)
 ========================================================
 
 
 ```r
-correlate(mtcars)
+correlate(d)
 ```
 
 ```
-# A tibble: 11 × 12
-   rowname        mpg        cyl       disp         hp        drat
-     <chr>      <dbl>      <dbl>      <dbl>      <dbl>       <dbl>
-1      mpg         NA -0.8521620 -0.8475514 -0.7761684  0.68117191
-2      cyl -0.8521620         NA  0.9020329  0.8324475 -0.69993811
-3     disp -0.8475514  0.9020329         NA  0.7909486 -0.71021393
-4       hp -0.7761684  0.8324475  0.7909486         NA -0.44875912
-5     drat  0.6811719 -0.6999381 -0.7102139 -0.4487591          NA
-6       wt -0.8676594  0.7824958  0.8879799  0.6587479 -0.71244065
-7     qsec  0.4186840 -0.5912421 -0.4336979 -0.7082234  0.09120476
-8       vs  0.6640389 -0.8108118 -0.7104159 -0.7230967  0.44027846
-9       am  0.5998324 -0.5226070 -0.5912270 -0.2432043  0.71271113
-10    gear  0.4802848 -0.4926866 -0.5555692 -0.1257043  0.69961013
-11    carb -0.5509251  0.5269883  0.3949769  0.7498125 -0.09078980
-# ... with 6 more variables: wt <dbl>, qsec <dbl>, vs <dbl>, am <dbl>,
-#   gear <dbl>, carb <dbl>
+# A tibble: 9 × 10
+   rowname       IQ_1       IQ_2       IQ_3   Rskill_1   Rskill_2
+     <chr>      <dbl>      <dbl>      <dbl>      <dbl>      <dbl>
+1     IQ_1         NA  0.4803999  0.4369312  0.2866469  0.3196786
+2     IQ_2  0.4803999         NA  0.4451631  0.2798004  0.3020919
+3     IQ_3  0.4369312  0.4451631         NA  0.2840341  0.3075566
+4 Rskill_1  0.2866469  0.2798004  0.2840341         NA  0.4445312
+5 Rskill_2  0.3196786  0.3020919  0.3075566  0.4445312         NA
+6 Rskill_3  0.3017266  0.3251597  0.2948236  0.4216245  0.4266115
+7   bald_1 -0.2937423 -0.3110973 -0.2914030 -0.2211088 -0.3182570
+8   bald_2 -0.2896269 -0.3117055 -0.2503099 -0.2785966 -0.3029422
+9   bald_3 -0.2977496 -0.2968287 -0.2524835 -0.2827164 -0.3080645
+# ... with 4 more variables: Rskill_3 <dbl>, bald_1 <dbl>, bald_2 <dbl>,
+#   bald_3 <dbl>
 ```
 
 Bonus: pairwise deletion used.  
@@ -137,64 +167,56 @@ Leverage the tidyverse
 ```r
 # dplyr is loaded with corrr
 
-correlate(mtcars) %>% 
-  select(rowname, mpg:hp) %>% 
-  filter(mpg > .3)
+correlate(d) %>% 
+  select(rowname, contains("_1")) %>% 
+  filter(bald_1 > 0)
 ```
 
 ```
-# A tibble: 5 × 5
-  rowname       mpg        cyl       disp         hp
-    <chr>     <dbl>      <dbl>      <dbl>      <dbl>
-1    drat 0.6811719 -0.6999381 -0.7102139 -0.4487591
-2    qsec 0.4186840 -0.5912421 -0.4336979 -0.7082234
-3      vs 0.6640389 -0.8108118 -0.7104159 -0.7230967
-4      am 0.5998324 -0.5226070 -0.5912270 -0.2432043
-5    gear 0.4802848 -0.4926866 -0.5555692 -0.1257043
+# A tibble: 2 × 4
+  rowname       IQ_1   Rskill_1    bald_1
+    <chr>      <dbl>      <dbl>     <dbl>
+1  bald_2 -0.2896269 -0.2785966 0.4608222
+2  bald_3 -0.2977496 -0.2827164 0.4553511
 ```
+
+What else?
+========================================================
+
+Other corrr functions support routine exploration.
+
+Examples...
+
+Get visual
+========================================================
+
+
+```r
+correlate(d) %>% network_plot()
+```
+
+<img src="slides-figure/network_plot-1.png" title="plot of chunk network_plot" alt="plot of chunk network_plot" style="display: block; margin: auto;" />
 
 Get fashionable
 ========================================================
 
 
 ```r
-correlate(mtcars) %>% fashion()
+correlate(d) %>% fashion()
 ```
 
 ```
-   rowname  mpg  cyl disp   hp drat   wt qsec   vs   am gear carb
-1      mpg      -.85 -.85 -.78  .68 -.87  .42  .66  .60  .48 -.55
-2      cyl -.85       .90  .83 -.70  .78 -.59 -.81 -.52 -.49  .53
-3     disp -.85  .90       .79 -.71  .89 -.43 -.71 -.59 -.56  .39
-4       hp -.78  .83  .79      -.45  .66 -.71 -.72 -.24 -.13  .75
-5     drat  .68 -.70 -.71 -.45      -.71  .09  .44  .71  .70 -.09
-6       wt -.87  .78  .89  .66 -.71      -.17 -.55 -.69 -.58  .43
-7     qsec  .42 -.59 -.43 -.71  .09 -.17       .74 -.23 -.21 -.66
-8       vs  .66 -.81 -.71 -.72  .44 -.55  .74       .17  .21 -.57
-9       am  .60 -.52 -.59 -.24  .71 -.69 -.23  .17       .79  .06
-10    gear  .48 -.49 -.56 -.13  .70 -.58 -.21  .21  .79       .27
-11    carb -.55  .53  .39  .75 -.09  .43 -.66 -.57  .06  .27     
+   rowname IQ_1 IQ_2 IQ_3 Rskill_1 Rskill_2 Rskill_3 bald_1 bald_2 bald_3
+1     IQ_1       .48  .44      .29      .32      .30   -.29   -.29   -.30
+2     IQ_2  .48       .45      .28      .30      .33   -.31   -.31   -.30
+3     IQ_3  .44  .45           .28      .31      .29   -.29   -.25   -.25
+4 Rskill_1  .29  .28  .28               .44      .42   -.22   -.28   -.28
+5 Rskill_2  .32  .30  .31      .44               .43   -.32   -.30   -.31
+6 Rskill_3  .30  .33  .29      .42      .43            -.30   -.31   -.29
+7   bald_1 -.29 -.31 -.29     -.22     -.32     -.30           .46    .46
+8   bald_2 -.29 -.31 -.25     -.28     -.30     -.31    .46           .49
+9   bald_3 -.30 -.30 -.25     -.28     -.31     -.29    .46    .49       
 ```
-
-Get visual
-========================================================
-
-
-```r
-correlate(mtcars) %>% network_plot()
-```
-
-<img src="slides-figure/network_plot-1.png" title="plot of chunk network_plot" alt="plot of chunk network_plot" style="display: block; margin: auto;" />
-
-Get visual
-========================================================
-
-
-```r
-correlate(mtcars) %>% rplot()
-```
-
-<img src="slides-figure/rplot-1.png" title="plot of chunk rplot" alt="plot of chunk rplot" style="display: block; margin: auto;" />
 
 Find patterns
 ========================================================
@@ -206,41 +228,17 @@ correlate(mtcars) %>% rearrange() %>% rplot()
 
 <img src="slides-figure/rearrange-1.png" title="plot of chunk rearrange" alt="plot of chunk rearrange" style="display: block; margin: auto;" />
 
-Focus in
-========================================================
-
-
-```r
-correlate(mtcars) %>% focus(mpg, drat)
-```
-
-```
-# A tibble: 9 × 3
-  rowname        mpg        drat
-    <chr>      <dbl>       <dbl>
-1     cyl -0.8521620 -0.69993811
-2    disp -0.8475514 -0.71021393
-3      hp -0.7761684 -0.44875912
-4      wt -0.8676594 -0.71244065
-5    qsec  0.4186840  0.09120476
-6      vs  0.6640389  0.44027846
-7      am  0.5998324  0.71271113
-8    gear  0.4802848  0.69961013
-9    carb -0.5509251 -0.09078980
-```
-
 Did I mention the tidyverse?
 ========================================================
 
 
 ```r
 library(ggplot2)
-correlate(mtcars) %>% focus(mpg) %>%
-  mutate(rowname = reorder(rowname, mpg)) %>% 
-  ggplot(aes(rowname, mpg, fill = mpg)) +
-    geom_col() +
-    labs(x = NULL, y = "Correlation with mpg") +
-    coord_flip() + guides(fill = "none") + theme_minimal()
+correlate(d) %>% focus(bald_1) %>%
+  mutate(rowname = reorder(rowname, bald_1)) %>% 
+  ggplot(aes(rowname, bald_1, fill = bald_1)) +
+    geom_col() + coord_flip() + guides(fill = "none") + 
+    labs(x = NULL, y = "Correlation with bald_1") + theme_minimal()
 ```
 
 <img src="slides-figure/ggplot-1.png" title="plot of chunk ggplot" alt="plot of chunk ggplot" style="display: block; margin: auto;" />
