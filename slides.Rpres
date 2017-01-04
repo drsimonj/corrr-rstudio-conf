@@ -10,12 +10,22 @@ Presented at rstudio::conf, 2017
 
 [@drsimonj](https://twitter.com/drsimonj)
 
+```{r setup, echo = F}
+source("R/data-sim.R")
+d <- simulate_data()
+```
+
 Motivation
 ========================================================
 
 - Correlations are fundamental measures of association.
 - We want to explore them.
 - We should explore them!
+
+```{r}
+head(d)
+```
+
 
 Motivation
 ========================================================
