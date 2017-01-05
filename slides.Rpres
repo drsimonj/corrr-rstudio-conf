@@ -160,10 +160,13 @@ correlate(d) %>% focus(bald_1) %>%
 Sign off
 ========================================================
 
-Thank you!
+Thanks to:
 
-And thanks to RStudio for having me.
 
+- you!
+- the community helping to improve corrr.
+- RStudio for having me.
+ 
 [@drsimonj](https://twitter.com/drsimonj)
 
 [github.com/drsimonj](https://github.com/drsimonj)
