@@ -187,16 +187,6 @@ Other corrr functions support routine exploration.
 
 Examples...
 
-Get visual
-========================================================
-
-
-```r
-correlate(d) %>% network_plot()
-```
-
-<img src="slides-figure/network_plot-1.png" title="plot of chunk network_plot" alt="plot of chunk network_plot" style="display: block; margin: auto;" />
-
 Get fashionable
 ========================================================
 
@@ -223,10 +213,24 @@ Find patterns
 
 
 ```r
-correlate(mtcars) %>% rearrange() %>% rplot()
+correlate(mtcars) %>%
+  rearrange(absolute = FALSE) %>%  # Rearrange columns and rows
+  shave() %>%                      # Shave upper tri (to NA)
+  rplot()                          # Dot plot
 ```
 
 <img src="slides-figure/rearrange-1.png" title="plot of chunk rearrange" alt="plot of chunk rearrange" style="display: block; margin: auto;" />
+
+Get visual
+========================================================
+
+
+```r
+correlate(d) %>% network_plot()
+```
+
+<img src="slides-figure/network_plot-1.png" title="plot of chunk network_plot" alt="plot of chunk network_plot" style="display: block; margin: auto;" />
+
 
 Did I mention the tidyverse?
 ========================================================
