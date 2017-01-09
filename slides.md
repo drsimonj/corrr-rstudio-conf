@@ -1,12 +1,10 @@
 Exploring correlations in a tidy R framework with corrr
 ========================================================
 author: Dr Simon Jackson
-date: January 13, 2017
+date: rstudio::conf, 13 January 2017
 autosize: true
 css: custom.css
 font-family: 'Arial'
-
-Presented at rstudio::conf, 2017
 
 <img src='imgs/social_media_icons/twitter.png' class='img-valign' height=50>
 <img src='imgs/social_media_icons/github.png' class='img-valign' height=50>
