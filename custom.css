@@ -2,3 +2,12 @@
   /* Make sure code fits on slide */
   font-size: 100%;
 }
+
+.reveal .img-valign {
+  vertical-align: middle;
+  margin-bottom: 0.75em;
+}
+
+.reveal .img-tabbed {
+  margin-left: 2em;
+}

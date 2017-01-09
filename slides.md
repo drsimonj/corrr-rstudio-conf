@@ -8,7 +8,11 @@ font-family: 'Arial'
 
 Presented at rstudio::conf, 2017
 
-[@drsimonj](https://twitter.com/drsimonj)
+<img src='imgs/social_media_icons/twitter.png' class='img-valign' height=50>
+<img src='imgs/social_media_icons/github.png' class='img-valign' height=50>
+@drsimonj
+<img src='imgs/social_media_icons/gmail.png' class='img-valign img-tabbed' height=50>
+drsimonjackson@gmail.com
 
 
 
@@ -256,7 +260,9 @@ Thanks to:
 - you!
 - the community helping to improve corrr.
 - RStudio for having me.
- 
-[@drsimonj](https://twitter.com/drsimonj)
 
-[github.com/drsimonj](https://github.com/drsimonj)
+<img src='imgs/social_media_icons/twitter.png' class='img-valign' height=50>
+<img src='imgs/social_media_icons/github.png' class='img-valign' height=50>
+@drsimonj
+<img src='imgs/social_media_icons/gmail.png' class='img-valign img-tabbed' height=50>
+drsimonjackson@gmail.com
