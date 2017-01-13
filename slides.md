@@ -233,7 +233,6 @@ correlate(d) %>% network_plot()
 
 <img src="slides-figure/network_plot-1.png" title="plot of chunk network_plot" alt="plot of chunk network_plot" style="display: block; margin: auto;" />
 
-
 Did I mention the tidyverse?
 ========================================================
 
@@ -248,6 +247,16 @@ correlate(d) %>% focus(bald_1) %>%
 ```
 
 <img src="slides-figure/ggplot-1.png" title="plot of chunk ggplot" alt="plot of chunk ggplot" style="display: block; margin: auto;" />
+
+Learning more
+========================================================
+
+- [corrr on GitHub](https://github.com/drsimonj/corrr)
+- [blogR](https://drsimonj.svbtle.com/)
+
+For tidying square structures in general (not mine):
+
+- [widyr](https://github.com/dgrtwo/widyr)
 
 Sign off
 ========================================================

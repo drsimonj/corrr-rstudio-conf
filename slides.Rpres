@@ -150,7 +150,6 @@ Get visual
 correlate(d) %>% network_plot()
 ```
 
-
 Did I mention the tidyverse?
 ========================================================
 
@@ -162,6 +161,16 @@ correlate(d) %>% focus(bald_1) %>%
     geom_col() + coord_flip() + guides(fill = "none") + 
     labs(x = NULL, y = "Correlation with bald_1") + theme_minimal()
 ```
+
+Learning more
+========================================================
+
+- [corrr on GitHub](https://github.com/drsimonj/corrr)
+- [blogR](https://drsimonj.svbtle.com/)
+
+For tidying square structures in general (not mine):
+
+- [widyr](https://github.com/dgrtwo/widyr)
 
 Sign off
 ========================================================
